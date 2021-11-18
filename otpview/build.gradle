@@ -41,7 +41,7 @@ afterEvaluate{
                 name = "GitHubPackages"
                 url = uri(getGitHubUrl())
                 credentials {
-                    username = github['gpr.usr'] ?: System.getenv("GPR_USER")
+                    username = github['gpr.user'] ?: System.getenv("GPR_USER")
                     password = github['gpr.key'] ?: System.getenv("GPR_API_KEY")
                 }
             }
