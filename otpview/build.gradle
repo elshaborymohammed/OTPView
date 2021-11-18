@@ -1,6 +1,5 @@
 apply plugin: 'maven-publish'
 apply from: rootProject.file('android-library.gradle')
-//apply from: rootProject.file("github.properties")
 
 dependencies {
     implementation androidx.appCompat
@@ -44,9 +43,6 @@ afterEvaluate{
                 credentials {
                     username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                     password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-
-//                    username = gpr.usr
-//                    password = gpr.key
                 }
             }
         }
