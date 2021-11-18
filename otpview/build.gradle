@@ -1,0 +1,54 @@
+apply plugin: 'maven-publish'
+apply from: rootProject.file('android-library.gradle')
+//apply from: rootProject.file("github.properties")
+
+dependencies {
+    implementation androidx.appCompat
+    implementation androidx.material
+}
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+def getVersionName = { ->
+    return "0.0.1" // Replace with version Name
+}
+
+def getArtifactId = { ->
+    return "otpview" // Replace with library name ID
+}
+
+def getGroupId = { ->
+    return "com.compact.widget"
+}
+
+def getGitHubUrl = { ->
+    return "https://maven.pkg.github.com/elshaborymohammed/OTPView"
+}
+
+afterEvaluate{
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId getGroupId() // Replace with group ID
+                artifactId getArtifactId()
+                version getVersionName()
+                artifact("$buildDir/outputs/aar/otpview-release.aar")
+            }
+        }
+
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri(getGitHubUrl())
+                credentials {
+                    username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                    password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+
+//                    username = gpr.usr
+//                    password = gpr.key
+                }
+            }
+        }
+    }
+}
