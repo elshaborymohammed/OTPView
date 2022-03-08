@@ -6,11 +6,8 @@ dependencies {
     implementation androidx.material
 }
 
-def github = new Properties()
-github.load(new FileInputStream(rootProject.file("github.properties")))
-
 def getVersionName = { ->
-    return "0.0.1" // Replace with version Name
+    return "0.0.2" // Replace with version Name
 }
 
 def getArtifactId = { ->
@@ -41,8 +38,8 @@ afterEvaluate{
                 name = "GitHubPackages"
                 url = uri(getGitHubUrl())
                 credentials {
-                    username = github['gpr.user'] ?: System.getenv("GPR_USER")
-                    password = github['gpr.key'] ?: System.getenv("GPR_API_KEY")
+                    username = System.getenv("GPR_USER")
+                    password = System.getenv("GPR_API_KEY")
                 }
             }
         }

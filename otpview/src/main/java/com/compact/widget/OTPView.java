@@ -17,10 +17,12 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class OTPView extends AppCompatEditText {
+public class OTPView extends TextInputEditText {
     //    public static final String DEFAULT_MASK = "\u25CF";
     private static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
 
@@ -31,7 +33,7 @@ public class OTPView extends AppCompatEditText {
     private boolean isLine = true;
     private boolean isError = false;
     private List<Rect> rect = new ArrayList<>();
-    private List<OnOTPCompleteListener> listeners = new ArrayList<>();
+    private final List<OnOTPCompleteListener> listeners = new ArrayList<>();
 
     public OTPView(Context context) {
         super(context);
